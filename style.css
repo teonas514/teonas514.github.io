@@ -1,5 +1,32 @@
-
-
-h1 {
-  color:black;
+html,body{
+  margin: 0px;
+  display: flex;
+  justify-content: center;
 }
+
+#wrapper{
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1{
+  margin: auto;
+  display: block;
+}
+
+button{
+  
+}
+
+input{
+  width: 150px;
+}
+
+#screen{
+  width: 500px;
+  height: 500px;
+  display: block;
+}
+
