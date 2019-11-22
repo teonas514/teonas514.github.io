@@ -12,7 +12,10 @@
 
       <h1>Maze generator</h1>
       <p>
-        Mazes with over 40 000 cells will lag a lot.
+        Hello and welcome to Maze generator, enter your settings and press 'Generate' to generate.
+      </p>
+      <p>
+        Mazes with over 40 000 cells may slow down your computer.
       </p>
 
 
@@ -22,11 +25,11 @@
 
         <div id="colRow">
           <div>
-            <p>columns:</p>
+            <p>COLUMNS:</p>
             <input type="number" id="columns" name="columns">
           </div>
           <div>
-            <p>rows:</p>
+            <p>ROWS:</p>
             <input type="number" id="rows" name="rows">
           </div>
         </div>
@@ -38,18 +41,18 @@
 
 
               <div id="boxSettings">
-                <p>box width:</p>
+                <p>BOX WIDTH:</p>
                 <input type="number" id="boxWidth" name="box-width">
-                <p>box height:</p>
+                <p>BOX HEIGHT:</p>
                 <input type="number" id="boxHeight" name="box-height">
               </div>
               <div id="gridSettings">
-                  <p>grid size:</p>
+                  <p>GRID SIZE:</p>
                   <input type="number" id="gridSize" name="grid-size">
               </div>
             </div>
             <div id="stretch">
-              <p>stretch to fix box</p>
+              <p>STRETCH TO BOX:</p>
               <input type="checkbox" id="stretchToFit" name="strech-to-fit">
             </div>
           </div>
@@ -57,9 +60,21 @@
       
       <button id = "makeMaze" >Generate</button>
       <canvas id="screen"></canvas>
-      <p>test</p>
+      <p>Version: 1.01</p>
       
     </div>
+
+    <hr>
+    <div class="menu">
+
+      
+
+      <p><a href="FAQ.html"> FAQ </a> | <a href="index.html"> Home </a>
+        
+        | <a href="about.html"> About </a></p>
+    </div>
+
+
     <script type="module" src="main.js"></script>
   </body>
 </html>

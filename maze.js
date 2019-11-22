@@ -276,7 +276,7 @@ export default class Maze{
             if(!this.cells[x][y][i])
             {
             //g2d.globalAlpha = 0;
-              g2d.strokeStyle = "#ff0000";
+              g2d.strokeStyle = "#111111";
               g2d.beginPath();
               switch(i)
               {
