@@ -4,19 +4,38 @@
 import Maze from "./maze.js";
 
 const canvas = document.getElementById('screen');
+
+canvas.width = 500;
+canvas.height = 500;
+
 const g2d = canvas.getContext('2d');
 
 const makeMaze = document.getElementById("makeMaze");
 const columns = document.getElementById("columns");
 const rows = document.getElementById("rows");
 
-canvas.width = 500;
-canvas.height = 500;
+const gridSize = document.getElementById("gridSize");
+const width = document.getElementById("boxWidth");
+const height = document.getElementById("boxHeight");
 
-let nColumns = 64;
-let nRows = 64;
+const gridSettings = document.getElementById("gridSettings");
+const boxSettings = document.getElementById("boxSettings");
+
+const checkBox = document.getElementById("stretchToFit");
 
 
+checkBox.addEventListener("click",function(){
+  if (checkBox.checked){
+    gridSettings.style.display = "none";
+    boxSettings.style.display = "block";
+  }
+  else{
+    gridSettings.style.display = "block";
+    boxSettings.style.display = "none";
+  }  
+});
+
+/*
 columns.addEventListener("keyup",function(){
   nColumns = columns.value;
 });
@@ -24,21 +43,58 @@ columns.addEventListener("keyup",function(){
 rows.addEventListener("keyup",function(){
   nRows = rows.value;
 });
+*/
+async function test(m)
+{
+  m.makeMaze();
+  return "BAJS";
+}
 
-makeMaze.addEventListener("click",function(){
+function runMaze(m)
+{
+  return new Promise(resolve=>{
+    
+    m.makeMaze();
+
+    resolve('resolve');
+  });
+}
+
+async function generate()
+{
+
   g2d.fillStyle = "#ffffff";
   g2d.fillRect(0,0,500,500);
 
-  if(nColumns + nRows > 2)
+  if(columns.value + rows.value < 2)
   {
-  let m = new Maze(nColumns,nRows);
-
-m.makeMaze();
-m.visualize(10,10,480,480);
+    return
   }
-});
+    
+    let m = new Maze(columns.value,rows.value);
+    let result = await runMaze(m);
 
-let m = new Maze(nColumns,nRows);
+    let gsx = 0;
+    let gsy = 0;
+    
+    if(checkBox.checked)
+    {
+      gsx = width.value/m.rows;
+      gsy = height.value/m.columns;
+    }
+    else{
+      gsx = gridSize.value;
+      gsy = gridSize.value;
+    }
+    gsy = parseFloat(gsy);
+    gsx = parseFloat(gsx);
 
-m.makeMaze();
-m.visualize(20,20,460,460);
+
+
+    let posX = (canvas.width - gsx*m.rows)/2;
+    let posY = (canvas.height - gsy*m.columns)/2;
+
+    m.visualize(posX,posY,gsx,gsy);
+}
+
+makeMaze.addEventListener("click",generate);

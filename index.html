@@ -4,21 +4,61 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+
+
+
     <div id="wrapper">
-      <h1>maze generator</h1>
+
+
+      <h1>Maze generator</h1>
       <p>
-        mazes over 200x200 will lag a lot
+        Mazes with over 40 000 cells will lag a lot.
       </p>
-      <div class="input">
-        <input type="number" id="rows" name="rows">
-        <input type="number" id="columns" name="columns">
-        <button id = "makeMaze" >Make maze</button>
+
+
+
+      <div id="settings">
+
+
+        <div id="colRow">
+          <div>
+            <p>columns:</p>
+            <input type="number" id="columns" name="columns">
+          </div>
+          <div>
+            <p>rows:</p>
+            <input type="number" id="rows" name="rows">
+          </div>
+        </div>
+
+
+
+          <div id="displaySettings">
+            <div> <!-- div for number input-->
+
+
+              <div id="boxSettings">
+                <p>box width:</p>
+                <input type="number" id="boxWidth" name="box-width">
+                <p>box height:</p>
+                <input type="number" id="boxHeight" name="box-height">
+              </div>
+              <div id="gridSettings">
+                  <p>grid size:</p>
+                  <input type="number" id="gridSize" name="grid-size">
+              </div>
+            </div>
+            <div id="stretch">
+              <p>stretch to fix box</p>
+              <input type="checkbox" id="stretchToFit" name="strech-to-fit">
+            </div>
+          </div>
       </div>
-
+      
+      <button id = "makeMaze" >Generate</button>
       <canvas id="screen"></canvas>
-      <p>
-
-      </p>
+      <p>test</p>
+      
     </div>
     <script type="module" src="main.js"></script>
   </body>

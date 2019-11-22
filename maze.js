@@ -228,6 +228,9 @@ export default class Maze{
       }
       this.cells[0][0][3] = true;
       this.cells[this.rows-1][this.columns-1][0] = true;
+
+
+      return Promise.resolve(1);
     }
     
     connect(x,y)
@@ -262,12 +265,8 @@ export default class Maze{
       let nextPos = this.digFrom(x,y,dir);
     }
     
-    visualize(posX,posY,sizeX,sizeY)
+    visualize(posX,posY,gsx,gsy)
     {
-      let gsx = sizeX/this.rows;
-      let gsy = sizeY/this.columns;
-  
-  
       for(let y = 0; y<this.columns; y++)
       {
         for(let x = 0; x<this.rows; x++)
@@ -277,7 +276,7 @@ export default class Maze{
             if(!this.cells[x][y][i])
             {
             //g2d.globalAlpha = 0;
-              g2d.strokeStyle = "#000000";
+              g2d.strokeStyle = "#ff0000";
               g2d.beginPath();
               switch(i)
               {
