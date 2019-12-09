@@ -66,7 +66,7 @@ async function generate()
   g2d.fillStyle = "#ffffff";
   g2d.fillRect(0,0,500,500);
 
-  if(columns.value + rows.value < 2)
+  if(columns.value + rows.value <= 2)
   {
     return
   }
