@@ -23,7 +23,20 @@ const boxSettings = document.getElementById("boxSettings");
 
 const checkBox = document.getElementById("stretchToFit");
 
+const warningText = document.getElementById("warningText");
 
+function checkWarn(){
+  if(columns.value * rows.value > 40000)
+  {
+    warningText.style.visibility = "visible";
+  }
+  else{
+    console.log("yes!");
+    warningText.style.visibility = "hidden";
+  }
+}
+
+checkWarn();
 checkBox.addEventListener("click",function(){
   if (checkBox.checked){
     gridSettings.style.display = "none";
@@ -35,15 +48,9 @@ checkBox.addEventListener("click",function(){
   }  
 });
 
-/*
-columns.addEventListener("keyup",function(){
-  nColumns = columns.value;
-});
+columns.addEventListener("keyup",checkWarn);
+rows.addEventListener("keyup",checkWarn);
 
-rows.addEventListener("keyup",function(){
-  nRows = rows.value;
-});
-*/
 async function test(m)
 {
   m.makeMaze();
@@ -62,13 +69,12 @@ function runMaze(m)
 
 async function generate()
 {
-
   g2d.fillStyle = "#ffffff";
   g2d.fillRect(0,0,500,500);
 
   if(columns.value + rows.value <= 2)
   {
-    return
+    return;
   }
     
     let m = new Maze(columns.value,rows.value);
@@ -88,8 +94,6 @@ async function generate()
     }
     gsy = parseFloat(gsy);
     gsx = parseFloat(gsx);
-
-
 
     let posX = (canvas.width - gsx*m.rows)/2;
     let posY = (canvas.height - gsy*m.columns)/2;

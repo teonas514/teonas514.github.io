@@ -17,6 +17,18 @@ html,body{
   justify-content: space-evenly;
 }
 
+#warningText{
+  color:red;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink{
+  0% {opacity: 0;}
+  50%{opacity: 1;}
+}
+
+
+
 h1{
   color: #111111;
   text-shadow: 1px 1px #bbbbbb;
