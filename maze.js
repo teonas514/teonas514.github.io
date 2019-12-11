@@ -3,7 +3,7 @@ const canvas = document.getElementById('screen');
 const g2d = canvas.getContext('2d');
 
 export default class Maze{
-  
+    
     constructor(c,r)
     {
       this.columns = c;
@@ -207,29 +207,30 @@ export default class Maze{
     }
     
     
-    makeMaze()
+    makeMaze(posX,posY,gsx,gsy,visualize)
     {
       this.makeArm(0,0);
-      while(true)
-      {
+
+      let id = setInterval(()=>{
         //("newArm");
         
         let lowest = this.getLowestCell(); 
         
         if(lowest === null)
         {
-          break;
+          this.visualize(posX,posY,gsx,gsy);
+          clearInterval(id);
         }
-        //(lowest[0],lowest[1]);
-        
-        this.connect(lowest[0],lowest[1]);
-        this.makeArm(lowest[0],lowest[1]);
-        //("endArm");
-      }
+        else
+        {
+          if(visualize){this.visualize(posX,posY,gsx,gsy);}
+          this.connect(lowest[0],lowest[1]);
+          this.makeArm(lowest[0],lowest[1]);
+        }
+      }, 0);
       this.cells[0][0][3] = true;
       this.cells[this.rows-1][this.columns-1][0] = true;
-
-
+      
       return Promise.resolve(1);
     }
     
@@ -267,6 +268,9 @@ export default class Maze{
     
     visualize(posX,posY,gsx,gsy)
     {
+      g2d.fillStyle = "#ffffff";
+      g2d.fillRect(0,0,500,500);
+    
       for(let y = 0; y<this.columns; y++)
       {
         for(let x = 0; x<this.rows; x++)

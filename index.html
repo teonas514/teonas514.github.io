@@ -20,10 +20,10 @@
 
       <p id="warningText">WARNING THIS MAZE IS OVER 40 000 CELLS!</p>
 
-      <div id="settings">
+      <div class="settings">
 
 
-        <div id="colRow">
+        <div class="setting" id="colRow">
           <div>
             <p>ROWS:</p>
             <input type="number" id="rows" name="rows">
@@ -36,11 +36,11 @@
 
 
 
-          <div id="displaySettings">
+          <div class="setting" id="displaySettings">
             <div> <!-- div for number input-->
 
 
-              <div id="boxSettings">
+              <div  id="boxSettings">
                 <p>BOX WIDTH:</p>
                 <input type="number" id="boxWidth" name="box-width">
                 <p>BOX HEIGHT:</p>
@@ -56,11 +56,18 @@
               <input type="checkbox" id="stretchToFit" name="strech-to-fit">
             </div>
           </div>
+          <div class="setting" id="visual">
+            <p>VISUALIZE:</p>
+            <input type="checkbox" id="visualize" name="bajs">
+          </div>
+          
       </div>
+      
+
       
       <button id = "makeMaze" >Generate</button>
       <canvas id="screen"></canvas>
-      <p>Version: 1.01</p>
+      <p>Version: 1.02</p>
       
     </div>
 

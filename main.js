@@ -21,24 +21,31 @@ const height = document.getElementById("boxHeight");
 const gridSettings = document.getElementById("gridSettings");
 const boxSettings = document.getElementById("boxSettings");
 
-const checkBox = document.getElementById("stretchToFit");
+const stretchToFit = document.getElementById("stretchToFit");
 
 const warningText = document.getElementById("warningText");
+//const warningSound = new Audio();
+const visualize = document.getElementById("visualize");
 
 function checkWarn(){
-  if(columns.value * rows.value > 40000)
+  if((columns.value * rows.value > 40000) && !visualize.checked)
   {
     warningText.style.visibility = "visible";
   }
   else{
-    console.log("yes!");
     warningText.style.visibility = "hidden";
   }
 }
 
+
+
+warningText.addEventListener("animationend",function(){
+  
+});
+
 checkWarn();
-checkBox.addEventListener("click",function(){
-  if (checkBox.checked){
+stretchToFit.addEventListener("click",function(){
+  if (stretchToFit.checked){
     gridSettings.style.display = "none";
     boxSettings.style.display = "block";
   }
@@ -48,20 +55,16 @@ checkBox.addEventListener("click",function(){
   }  
 });
 
+
 columns.addEventListener("keyup",checkWarn);
 rows.addEventListener("keyup",checkWarn);
+visualize.addEventListener("change",checkWarn);
 
-async function test(m)
-{
-  m.makeMaze();
-  return "BAJS";
-}
-
-function runMaze(m)
+function runMaze(m,posX,posY,gsx,gsy)
 {
   return new Promise(resolve=>{
     
-    m.makeMaze();
+    m.makeMaze(posX,posY,gsx,gsy,visualize.checked);
 
     resolve('resolve');
   });
@@ -77,13 +80,11 @@ async function generate()
     return;
   }
     
-    let m = new Maze(columns.value,rows.value);
-    let result = await runMaze(m);
 
     let gsx = 0;
     let gsy = 0;
     
-    if(checkBox.checked)
+    if(stretchToFit.checked)
     {
       gsx = width.value/m.rows;
       gsy = height.value/m.columns;
@@ -95,10 +96,12 @@ async function generate()
     gsy = parseFloat(gsy);
     gsx = parseFloat(gsx);
 
+    let m = new Maze(columns.value,rows.value);
+    
     let posX = (canvas.width - gsx*m.rows)/2;
     let posY = (canvas.height - gsy*m.columns)/2;
-
-    m.visualize(posX,posY,gsx,gsy);
+    
+    let result = await runMaze(m,posX,posY,gsx,gsy);
 }
 
 makeMaze.addEventListener("click",generate);
