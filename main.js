@@ -26,10 +26,12 @@ const stretchToFit = document.getElementById("stretchToFit");
 const warningText = document.getElementById("warningText");
 //const warningSound = new Audio();
 const visualize = document.getElementById("visualize");
-
+const alarm = new Audio('assets/audios/critical_error.wav');
+alarm.volume = .05;
 function checkWarn(){
   if((columns.value * rows.value > 40000) && !visualize.checked)
   {
+    alarm.play();
     warningText.style.visibility = "visible";
   }
   else{
@@ -37,10 +39,13 @@ function checkWarn(){
   }
 }
 
-
-
-warningText.addEventListener("animationend",function(){
-  
+warningText.addEventListener("animationiteration",function(){
+  alarm.pause();
+  alarm.currentTime = 0;
+  if (warningText.style.visibility == "visible")
+  {
+    alarm.play();
+  }
 });
 
 checkWarn();
@@ -54,7 +59,6 @@ stretchToFit.addEventListener("click",function(){
     boxSettings.style.display = "none";
   }  
 });
-
 
 columns.addEventListener("keyup",checkWarn);
 rows.addEventListener("keyup",checkWarn);
@@ -80,7 +84,6 @@ async function generate()
     return;
   }
     
-
     let gsx = 0;
     let gsy = 0;
     
