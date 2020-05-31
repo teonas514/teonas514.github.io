@@ -67,6 +67,7 @@ main {
 }
 
 .next, .previous {
+    font-size: 0;
     position: fixed;
     width: 80px;
     height: 80px;
