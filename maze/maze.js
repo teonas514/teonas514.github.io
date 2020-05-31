@@ -1,5 +1,5 @@
 import Math2 from "./math.js";
-const canvas = document.getElementById('screen');
+const canvas = document.getElementById('maze-canvas');
 const g2d = canvas.getContext('2d');
 
 export default class Maze{
@@ -207,19 +207,21 @@ export default class Maze{
     }
     
     
-    makeMaze(posX,posY,gsx,gsy,visualize)
+    generate(posX,posY,gsx,gsy,visualize)
     {
       this.makeArm(0,0);
 
-      let id = setInterval(()=>{
+      this.id = setInterval(()=>{
         //("newArm");
         
         let lowest = this.getLowestCell(); 
         
         if(lowest === null)
         {
+          this.cells[0][0][3] = true;
+          this.cells[this.rows-1][this.columns-1][0] = true;
           this.visualize(posX,posY,gsx,gsy);
-          clearInterval(id);
+          clearInterval(this.id);
         }
         else
         {
@@ -228,9 +230,8 @@ export default class Maze{
           this.makeArm(lowest[0],lowest[1]);
         }
       }, 0);
-      this.cells[0][0][3] = true;
-      this.cells[this.rows-1][this.columns-1][0] = true;
-      
+
+      //[0] = true;
       return Promise.resolve(1);
     }
     
@@ -265,11 +266,23 @@ export default class Maze{
       }
       let nextPos = this.digFrom(x,y,dir);
     }
-    
+    clear()
+    {
+      if(this.id)
+      {
+        clearInterval(this.id);
+      }
+      g2d.fillStyle = "#ffffff";
+      g2d.fillRect(0,0,canvas.width,canvas.height);
+
+    }
     visualize(posX,posY,gsx,gsy)
     {
+      gsx = parseInt(gsx);
+      gsy = parseInt(gsy);
+
       g2d.fillStyle = "#ffffff";
-      g2d.fillRect(0,0,500,500);
+      g2d.fillRect(0,0,canvas.width,canvas.height);
     
       for(let y = 0; y<this.columns; y++)
       {
@@ -280,26 +293,30 @@ export default class Maze{
             if(!this.cells[x][y][i])
             {
             //g2d.globalAlpha = 0;
+              g2d.lineCap = "round";
               g2d.strokeStyle = "#111111";
               g2d.beginPath();
+              
+              let offsetX = x*gsx+posX; 
+              let offsetY = y*gsy+posY;
+              
               switch(i)
               {
                 case 0: //roof
-                  g2d.moveTo(x*gsx+posX,y*gsy+posY+gsy);
-                  g2d.lineTo(x*gsx+posX+gsx,y*gsy+posY+gsy);
+                  g2d.moveTo(offsetX,offsetY+gsy);
+                  g2d.lineTo(offsetX+gsx,offsetY+gsy);
                   break;
                 case 1: //side
-                  //g2d.fillRect(x*gs+posX+gs,y*gs+posY,1,gs);
-                  g2d.moveTo(x*gsx+posX+gsx,y*gsy+posY);
-                  g2d.lineTo(x*gsx+posX+gsx,y*gsy+posY+gsy);
+                  g2d.moveTo(offsetX+gsx,offsetY);
+                  g2d.lineTo(offsetX+gsx,offsetY+gsy);
                   break;
                 case 2:
-                  g2d.moveTo(x*gsx+posX,y*gsy+posY);
-                  g2d.lineTo(x*gsx+posX,y*gsy+posY+gsy);
+                  g2d.moveTo(offsetX,offsetY);
+                  g2d.lineTo(offsetX,offsetY+gsy);
                   break;
                 case 3:
-                  g2d.moveTo(x*gsx+posX,y*gsy+posY);
-                  g2d.lineTo(x*gsx+posX+gsx,y*gsy+posY);
+                  g2d.moveTo(offsetX,offsetY);
+                  g2d.lineTo(offsetX+gsx,offsetY);
                   break;
               }
               g2d.stroke();

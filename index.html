@@ -1,86 +1,197 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+<html lang="en-SE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Projects</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <main>  
+        <h1>JS Projects</h1>
+        <nav>
+            <a href="about.html">About</a>
+        </nav>
+        <ul id="project-list">
+            
+            <li id="game-of-life" class="project">
+                <article class="card">
+                    <h2 class="title">Game of Life</h2>
+                    <section class="info-settings">
+                        <div class="buttons">
+                            <button type="button" class="i" name="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 24c6.627 0 12-5.373 12-12s-5.373-12-12-12-12 5.373-12 12 5.373 12 12 12zm1-6h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z"/></svg></button>
+                            <button type="button" class="gear" name="settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/></svg></button>
+                        </div>
+                        <section class="info">
+                            <button type="button" class="close" name="close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg> </button>
+                            <h3>What it is</h3>
+                            <p>The game of life is a <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automaton</a>. </p>
+                            <h3>The rules</h3>
+                            
+                            <ol class="steps">
+                                <li>A cells is populated with exactly 3 neighbours.</li>
+                                <li>A cell dies with over 4 neighbours.</li>
+                                <li>A cell dies with under 1 neighbour.</li>
+                            </ol>
+                            <p>(Neighbours include diagonal neighbours.)</p>
+                        </section>
+                        <section class="settings">
+                            <button type="button" class="close" name="close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg> </button>
+                            <ul>
+                                <li>
+                                    <label>Grid size</label>
+                                    <input type="number" id="gol-grid-size">
+                                </li>
+                                <li>
+                                    <input type="button" value="Generate"  id="gol-generate">
+                                </li>
+                                <li>
+                                    <input type="button" value="Randomize"  id="randomize">
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
 
+                    <ul class="control-panel">
 
+                        <li>
+                            <button type="button" id="stop" class="big-button"><label>Stop</label></button>
+                        </li>
+                        <li>
+                            <label>Speed</label>
+                            <input type="range" min="0" max="100" id="speed">
+                        </li>
+                        <li>
+                            <button type="button" id="start" class="big-button"><label>Start</label></button>
+                        </li>
+                    </ul>  
+                    
+                    <canvas id="gol-canvas">
+                    </canvas>
+                </article>
+            </li>
+            <li id="maze-generator" class="project">
+                <article class="card">
+                    <h2 class="title">Maze Generator</h2>
 
-    <div id="wrapper">
+                    <section class="info-settings">
+                        <div class="buttons">
+                            <button type="button" class="i" name="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 24c6.627 0 12-5.373 12-12s-5.373-12-12-12-12 5.373-12 12 5.373 12 12 12zm1-6h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z"/></svg></button>
+                            <button type="button" class="gear" name="settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/></svg></button>
+                        </div>
+                        <section class="info">
+                            <button type="button" class="close" name="close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg> </button>
+                            <h3>Precautions</h3>
+                            <p>Generting a maze consisting of more than 40 000 cells may crash your browser or freeze the tab.</p>
+                            <p>Visualzing maze creation will slow the process since it has to draw the maze inbetween every step.</p>
+                            <h3>How it works</h3>
+                            <p>The algorithm works a lot like a <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">recrusive backtracker</a> but simplified.</p>
+                            <ol class="steps">
+                                <li>The top right most cell is selected</li>
+                                <img src="images/cell-choosen.png">
+                                <li>A empty cell neighbouring our first cell is <i>dug</i> to.</li>
+                                <li>Another empty cell neighbouring that cell is <i>dug</i> to.</li>
+                                <li>This continues until the newst cell have no more neighbouring empty cells.</li>
+                                <li>Afterwards another top right most cell is choosen.</li>
+                                <li>It picks a neighbouring populated cell to <i>dig</i> to.</li>
+                                <img src="images/new choosen.png">
+                                <li>Thereafter it replicates what the previous cells did.</li>
+                                <li>This continues until all cells have been populated.</li>
+                                <li>After all cells have been populated an exit and start is created.</li>
+                                <li>Maze is done!</li>
+                            </ol>
+                            <h3>How it was made</h3>
+                            <p> The maze algorithmn was originally created in Lua and I <i>translated</i> it over to javascript/ECMAscript as an exercise.</p>
+                        </section>
+                        
+                        <section class="settings">
+                            <button type="button" class="close" name="close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg> </button>
+                            <ul>
+                                <!--settings...-->
+                                <li class="setting">
+                                    <label>Rows</label>
+                                    <input value="25" id="rows" type="number">
+                                </li>
+                                <li class="setting">
+                                    <label>Columns</label>
+                                    <input value="25" id="columns" type="number">
+                                </li>
+                                <li class="setting">
+                                    <label>Visualize</label>
+                                    <input id="visualize" type="checkbox">
+                                </li>
+                                <li class="setting">
+                                    <label>Stretch to fit</label>
+                                    <input type="checkbox" id="stretch-to-fit">
+                                </li>
+                                <li class="setting">
+                                    <ul id="grid-settings">
+                                        <li id="maze-grid-box">
+                                            <label>Grid size</label>
+                                            <input type="number" value="25" id="maze-grid-size">   
+                                        </li>
+                                    </ul> 
+                                </li>
+                                <li class="setting">
+                                    <ul id="box-settings">
+                                        <li value="300" class="setting">
+                                            <label>width</label>
+                                            <input type="number" id="box-width">
+                                        </li>
+                                        <li value="300" class="setting">
+                                            <label>height</label>
+                                            <input type="number" id="box-width">
+                                        </li>
+                                    </ul> 
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                    <button type="button" value="Generate" id="maze-generate" class="big-button">
+                        <label>Generate</label>
+                    </button>
+                    <canvas id="maze-canvas"> </canvas>
+                </article>
+            </li>
+            <li id="flocking-simulator" class="project">
+                <article class="card">
+                    <h2 class="title">Flocking Simulator</h2>
+                    <section class="info-settings">
+                        <div class="buttons">
+                            <button type="button" class="i" name="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 24c6.627 0 12-5.373 12-12s-5.373-12-12-12-12 5.373-12 12 5.373 12 12 12zm1-6h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z"/></svg></button>
+                            <button type="button" class="gear" name="settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/></svg></button>
+                        </div>
 
+                        <section class="info">
+                            <button type="button" class="close" name="close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg> </button>
 
-      <h1>Maze generator</h1>
-      <p>
-        Hello and welcome to Maze generator, enter your settings and press 'Generate' to generate.
-      </p>
-      <p>
-        Mazes with over 40 000 cells may slow down your computer.
-      </p>
+                            <p>/!\ THIS IS A WORK IN PROGRESS /!\</p>
+                        </section>
+                        <section class="settings">
+                            <button type="button" class="close" name="close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg> </button>
 
-      <p id="warningText">WARNING THIS MAZE IS OVER 40 000 CELLS!</p>
-      <div class="settings">
+                            <ul>
+                                <input type="button" class="close-settings">
+                            </ul>
+                        </section>
+                    </section>
+                    <button type="button" value="Generate" id="" class="start-button">
+                        <p>Generate</p>
+                    </button>
+                    <canvas id="flocking-canvas">
+                    </canvas>
+                </article>
+            </li>
+        </ul>
+    </main>
 
-
-        <div class="setting" id="colRow">
-          <div>
-            <p>ROWS:</p>
-            <input type="number" id="rows" name="rows">
-          </div>
-          <div>
-            <p>COLUMNS:</p>
-            <input type="number" id="columns" name="columns">
-          </div>
-        </div>
-
-
-
-          <div class="setting" id="displaySettings">
-            <div> <!-- div for number input-->
-
-
-              <div  id="boxSettings">
-                <p>BOX WIDTH:</p>
-                <input type="number" id="boxWidth" name="box-width">
-                <p>BOX HEIGHT:</p>
-                <input type="number" id="boxHeight" name="box-height">
-              </div>
-              <div id="gridSettings">
-                  <p>GRID SIZE:</p>
-                  <input type="number" id="gridSize" name="grid-size">
-              </div>
-            </div>
-            <div id="stretch">
-              <p>STRETCH TO BOX:</p>
-              <input type="checkbox" id="stretchToFit" name="strech-to-fit">
-            </div>
-          </div>
-          <div class="setting" id="visual">
-            <p>VISUALIZE:</p>
-            <input type="checkbox" id="visualize" name="bajs">
-          </div>
-          
-      </div>
-      
-
-      
-      <button id = "makeMaze" >Generate</button>
-      <canvas id="screen"></canvas>
-      <p>Version: 1.02</p>
-      
-    </div>
-
-    <hr>
-    <div class="menu">
-
-      
-
-      <p><a href="FAQ.html"> FAQ </a> | <a href="index.html"> Home </a>
-        
-        | <a href="about.html"> About </a></p>
-    </div>
-
-
+    <button type="button" class="next"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg></button>
+    <button type="button" class="previous"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg></button>
+    
+    <script type="module" src="maze/mazesettings.js"></script>
+    <script type="module" src="gol/golsettings.js"></script>
+    <script type="module" src="flockingsimulator/flockingsimulator.js"></script>
     <script type="module" src="main.js"></script>
-  </body>
+</body>
 </html>

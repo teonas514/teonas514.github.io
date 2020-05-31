@@ -1,117 +1,422 @@
-html,body{
-  margin: 0px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  flex-direction: column;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-#wrapper{
-  max-width: 800px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
+h1 {
+    margin: 24px;
+    font-size: 46px;
 }
 
-input{
-  width: 150px;
+body,html {
+    background: #447788;
+    font-family: 'Roboto', sans-serif;
 }
 
-h1{
-  color: #111111;
-  text-shadow: 1px 1px #bbbbbb;
-  font-family: 'Times New Roman', Times, serif;
-  margin: auto;
-  display: block;
+button {
+    border-width: 0;
 }
 
-hr{
-  width: calc(100% - 50px);
+nav > a{
+    font-weight: 600;
+    color: black;
 }
 
-p{
-  font-family: 'Times New Roman', Times, serif;
-  text-shadow: 1px 1px #bbbbbb;
-  font-weight: bold;
-  color: #111111;
+
+nav > a:visited{
+    color: black;
 }
 
-strong{
-  font-family: 'Times New Roman', Times, serif;
-  text-shadow: 1px 1px #bbbbbb;
-  font-weight: bolder;
-  color: #111111;
-  font-size: 20px;
+#project-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    height: 1900px;
+    overflow: hidden;
+    width: 100%;
 }
 
-.setting{
-  justify-content: space-evenly;
-  display: flex;
-  align-items: baseline;
-  width: 100%;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project {
+    width: 100%;
+    
+    position: absolute;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 900px;
+    max-width: 100%;
+    background-color: #cccccc;
+    border-radius: 12px;
+    padding-top: 20px;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 4px 4px rgba(0, 0, 0, .5);
+}
+
+.next, .previous {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    top: 50vh;
+    padding: 15px;
+    border-radius: 12px;
+    background: #1b2a35;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.next:hover, .previous:hover{
+    padding: 5;
+    padding-right: 5px;
+    padding-left: 25px;
+    background: black;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+    filter:invert(1);
+}
+
+.previous{
+    transform: rotate(180deg);
+    left: 20%;
+}
+
+.info{
+    display: none;
+}
+
+.title{
+    font-size: 30px;
+}
+
+.next{
+    right: 20%;
+}
+
+.title{
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+canvas{
+    width: 700px;
+    height: 700px;
+    margin: 16px;
+    margin-bottom: 86px;
+    border-radius: 12px;
+}
+
+.big-button{
+    margin-top: 20px;
+    width: auto;
+    font-size: 24px;
+    padding: 10px;
+    background: #1b2a35;
+    color: white;
+    font-weight: 16px;
+    border-radius: 6px;
+}
+
+.start-button:hover {
+    background: black;
+    transition: .1s;
+
+}
+
+.buttons {
+    display: flex;
+}
+
+.info-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.i, .gear {
+    z-index: 1;
+    width: 48px;
+    padding: 6px;
+    border-width: 0px;
+    transition: .3s;
+    border-radius: 6px;
+}
+
+.gear:hover,.i:hover {
+    padding: 3px;
+    background: black;
+}
+
+.gear {
+    background: #447788;
+}
+
+.i {
+    margin-right: 6px;
+    background: #1b2a35;
+}
+
+@keyframes slidebuttons {
+    from {
+        margin-right: 0px;
+    }
+    to {
+        margin-right: 400px;
+    }
+}
+
+.slide-left {
+    animation-name: slidebuttons;
+    animation-duration: .5s;
+
+    margin-right: 400px;
+}
+
+.slide-back {
+    animation-name: slidebuttons;
+    animation-direction: reverse;
+    animation-duration: .5s;
+
+    margin-right: 0px;
+}
+
+.slide-left > * {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.info,.settings {
+    position: relative;
+    border-radius: 12px;
+    padding: 30px;
+    width: 500px;
+    max-width: 100%;
+
+}
+
+.info{
+    background: #1b2a35;
+    color: white;
+    flex-direction: column;
 }
 
 .settings{
-  border-radius: 3%;
-  padding: 5px;
-  margin: 15px;
-  width: 100%;
+    color: white;
+    background: #447788;
+    justify-content: center;
 }
 
-#colRow{
-  text-align: left;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+.setting{
+    width: 100%;
+    margin: 4px;
 }
 
-#epilouge{
-  text-align: center;
+.close {
+    background-color: transparent;
+    border-width: 0;
+    width: 48px;
+    height: 48px;
+    padding: 14px;
+    right: 0;
+    top: 0;
+    position: absolute;
 }
 
-#visual{
-  flex-direction: column;
-  align-items: center;
+.settings > ul {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    max-width: 90%;
+    list-style-type: none;
+    gap: 24px;
+    padding: 10px;
+    margin: 10px;
 }
 
-#boxSettings{
-  display:none;
+.setting{
+    margin: auto;
+    width: 100px;
 }
 
-#displaySettings{
-  justify-content: space-evenly;
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-}
-
-#mazeSettings{
-  width: 100%;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;  
+input {
+    width: 100%;
 }
 
 
-#screen{
-  width: 500px;
-  height: 500px;
-  display: block;
+#box-settings{
+    list-style-type: none;
 }
 
-#warningText{
-  visibility: hidden;
-  color:red;
-  animation: blink 2s step-end infinite;
+#grid-settings{
+    list-style-type: none;
 }
 
-@keyframes blink{
-  0% {opacity: 1;}
-  50%{opacity: 0;}
+@keyframes slideright {
+    from {
+        left: 0;
+    }
+    to {
+        left: 150%;
+    }
 }
 
+@keyframes slideleft {
+    from {
+        right: 0;
+    }
+    to {
+        right: 150%;
+    }
+}
+
+.slide-out-left {
+    animation-name: slideleft;
+    animation-duration: 1s;
+    right: 150%;
+}
+
+.slide-in-left {
+    animation-name: slideleft;
+    animation-duration: 1s;
+    animation-direction: reverse;
+    right: 0;
+}
+
+.slide-out-right {
+    animation-name: slideright;
+    animation-duration: 1s;
+    left: 150%;
+}
+
+.slide-in-right {
+    animation-name: slideright;
+    animation-duration: 1s;
+    animation-direction: reverse;
+    left: 0;
+}
+
+.steps {
+    margin-left: 30px;
+}
+
+.text-box{
+    margin: 18px;
+}
+
+.info > p,.text-box > p{
+    margin: 24px;
+}
+
+.info > ol{
+    margin: 24px;
+}
+
+a {
+    color: #77aaff;
+}
+
+a:visited {
+    color: #3377ff;
+}
+
+.control-panel{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.control-panel > *{
+    
+    margin: 12px;
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+    .next, .previous {
+        background: transparent;
+    }
+
+    .next:hover, .previous:hover{
+        background-color: white;
+    }
+
+    .next > svg,.previous>svg{
+        filter:invert(0);
+    }
+
+    .previous{
+        left: 5%;
+    }
+
+    .next{
+        right: 5%;
+    }
+}
+
+
+
+@media only screen and (max-width: 900px) {
+    canvas{
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .settings > ul {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .info,.settings {
+        position: relative;
+        border-radius: 12px;
+        padding: 30px;
+        width: 300px;
+        max-width: 100%;
+    }
+
+    @keyframes slidebuttons {
+        from {
+            margin-right: 0px;
+        }
+        to {
+            margin-right: 200px;
+        }
+    }
+
+
+    
+    .slide-left {    
+        margin-right: 200px;
+    }
+    
+    .slide-back {    
+        margin-right: 0px;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    canvas{
+        width: 450px;
+        height: 450px;
+    }
+}

@@ -1,114 +1,175 @@
-//let body = document.getElementsByTagName("body");
-//body[0].style.backgroundColor = "#0000ff";
+//sections
+let settings = document.querySelectorAll(".settings");
+let info = document.querySelectorAll(".info");
+//button pair
+let buttons = document.querySelectorAll(".buttons");
+//buttons
+let openSettings = document.querySelectorAll(".gear");
+let openInfo = document.querySelectorAll(".i");
+let close = document.querySelectorAll(".close")
+//next-prev buttons
+let next = document.querySelector(".next");
+let previous = document.querySelector(".previous");
 
-import Maze from "./maze.js";
+let projectList = document.querySelector("#project-list");
+let projects = document.querySelectorAll(".project");
 
-const canvas = document.getElementById('screen');
-
-canvas.width = 500;
-canvas.height = 500;
-
-const g2d = canvas.getContext('2d');
-
-const makeMaze = document.getElementById("makeMaze");
-const columns = document.getElementById("columns");
-const rows = document.getElementById("rows");
-
-const gridSize = document.getElementById("gridSize");
-const width = document.getElementById("boxWidth");
-const height = document.getElementById("boxHeight");
-
-const gridSettings = document.getElementById("gridSettings");
-const boxSettings = document.getElementById("boxSettings");
-
-const stretchToFit = document.getElementById("stretchToFit");
-
-const warningText = document.getElementById("warningText");
-//const warningSound = new Audio();
-const visualize = document.getElementById("visualize");
-const alarm = new Audio('assets/audios/critical_error.wav');
-alarm.volume = 0;
-function checkWarn(){
-  if((columns.value * rows.value > 40000) && !visualize.checked)
-  {
-    warningText.style.visibility = "visible";
-    alarm.volume = 0.5;
-
-  }
-  else{
-    warningText.style.visibility = "hidden";
-    alarm.volume = 0;
-  }
-}
-
-warningText.addEventListener("animationiteration",function(){
-  alarm.pause();
-  alarm.currentTime = 0;
-  alarm.play();
-
-  if (warningText.style.visibility == "visible")
-  {
-    alarm.volume = 0.5;
-  }
-});
-
-checkWarn();
-stretchToFit.addEventListener("click",function(){
-  if (stretchToFit.checked){
-    gridSettings.style.display = "none";
-    boxSettings.style.display = "block";
-  }
-  else{
-    gridSettings.style.display = "block";
-    boxSettings.style.display = "none";
-  }  
-});
-
-columns.addEventListener("keyup",checkWarn);
-rows.addEventListener("keyup",checkWarn);
-visualize.addEventListener("change",checkWarn);
-
-function runMaze(m,posX,posY,gsx,gsy)
-{
-  return new Promise(resolve=>{
-    
-    m.makeMaze(posX,posY,gsx,gsy,visualize.checked);
-
-    resolve('resolve');
-  });
-}
-
-async function generate()
-{
-  g2d.fillStyle = "#ffffff";
-  g2d.fillRect(0,0,500,500);
-
-  if(columns.value + rows.value <= 2)
-  {
-    return;
-  }
-    
-    let gsx = 0;
-    let gsy = 0;
-    
-    if(stretchToFit.checked)
-    {
-      gsx = width.value/m.rows;
-      gsy = height.value/m.columns;
+//changing project stuff
+class Slideshow {
+    constructor(elements) {
+        this.elements = elements;
+        this.currentListIndex = 1;
     }
-    else{
-      gsx = gridSize.value;
-      gsy = gridSize.value;
-    }
-    gsy = parseFloat(gsy);
-    gsx = parseFloat(gsx);
 
-    let m = new Maze(columns.value,rows.value);
-    
-    let posX = (canvas.width - gsx*m.rows)/2;
-    let posY = (canvas.height - gsy*m.columns)/2;
-    
-    let result = await runMaze(m,posX,posY,gsx,gsy);
+    addListIndex(n) {
+        this.currentListIndex += n;
+        
+        if(this.currentListIndex >= this.elements.length) { //wrap
+            this.currentListIndex = 0
+        }
+        else if(this.currentListIndex < 0) {
+            this.currentListIndex = this.elements.length -1
+        }
+    }
+
+    updateClasses(n) {
+        this.elements.forEach(element => {
+            if(element.classList.contains("slide-in-right") || element.classList.contains("slide-in-left") )
+            {
+                element.classList.remove("slide-in-right");
+                element.classList.remove("slide-in-left");
+                void element.offsetWidth;
+                if(n != 1)
+                {
+                    element.classList.add("slide-out-right");
+                }
+                else{
+                    element.classList.add("slide-out-left");
+                }
+            }
+        });
+        let element = this.elements[this.currentListIndex]
+
+        element.classList.remove("slide-out-right");
+        element.classList.remove("slide-out-left");
+        
+        void element.offsetWidth;
+        if(n != 1)
+        {
+            element.classList.add("slide-in-left");
+        }
+        else{
+            element.classList.add("slide-in-right");
+        }
+
+    }
+
+    assignClasses() {
+        this.elements.forEach(element => {
+            element.classList.add("slide-out-left");
+        });
+        let element = this.elements[this.currentListIndex]
+        element.classList.remove("slide-out-left");
+        void element.offsetWidth;
+        element.classList.add("slide-in-right");
+
+    }
+
+    update(n) {
+        this.addListIndex(n);
+        this.updateClasses(n);
+    }
 }
 
-makeMaze.addEventListener("click",generate);
+let slideshow = new Slideshow(projects);
+slideshow.assignClasses();
+
+
+function setupSlideShowButtons(button,increment) {
+    button.addEventListener("click", () => {
+            slideshow.update(increment);
+    });
+}
+
+function SetDisplayNone(elementList){
+    for (let i = 0; i<elementList.length; i++) {
+        elementList[i].style.display = "none";
+    }
+}
+
+//button stuff
+function updateButtons() {
+    for (let i = 0; i<buttons.length; i++) {
+
+        let buttonPair = buttons[i];
+        let infoButton = openInfo[i];
+        let settingsButton = openSettings[i];
+        let infoSection = info[i];
+        let settingsSection = settings[i];
+
+        if(infoSection && settingsSection) {
+            
+            if(infoSection.style.display == "none" && settingsSection.style.display == "none") {
+                buttonPair.classList.remove("slide-left");
+                void buttonPair.offsetWidth;
+                buttonPair.classList.add("slide-back");
+
+            }
+            else{
+                buttonPair.classList.remove("slide-back");
+                void buttonPair.offsetWidth;
+                buttonPair.classList.add("slide-left");
+
+                if(infoSection.style.display == "none")
+                {
+                    infoButton.style = "z-index: 0";
+                    settingsButton.style = "z-index: 1";
+                }
+                else
+                {
+                    infoButton.style = "z-index: 1";
+                    settingsButton.style = "z-index: 0";
+                }
+            }
+        }
+    }
+}
+
+function setupShowHideButtons(buttonList,showList,hideList) {
+    for (let i = 0; i<buttonList.length; i++) {
+
+        let button = buttonList[i];
+        let showSection = showList[i];
+        let hideSection = hideList[i];
+
+        button.addEventListener("click", () => {
+            if (showSection) {
+                showSection.style.display = "block";
+                if (hideSection) {
+                    hideSection.style.display = "none";
+                }
+            }
+            updateButtons();
+        });
+    }
+}
+
+function setupCloseButtons(buttonList) {
+    for (let i = 0; i<buttonList.length; i++) {
+        let button = buttonList[i]
+        button.addEventListener("click", () => {
+            button.parentElement.style.display = "none";
+            updateButtons()
+        });
+    }
+}
+
+SetDisplayNone(info);
+SetDisplayNone(settings);
+
+setupSlideShowButtons(previous,-1);
+setupSlideShowButtons(next,1);
+
+setupCloseButtons(close);
+setupShowHideButtons(openInfo,info,settings);
+setupShowHideButtons(openSettings,settings,info);
