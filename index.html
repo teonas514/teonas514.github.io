@@ -56,14 +56,14 @@
                     <ul class="control-panel">
 
                         <li>
-                            <button type="button" id="stop" class="big-button"><label>Stop</label></button>
+                            <button type="button" id="stop" class="big-button">Stop</button>
                         </li>
                         <li>
                             <label>Speed</label>
                             <input type="range" min="0" max="100" id="speed">
                         </li>
                         <li>
-                            <button type="button" id="start" class="big-button"><label>Start</label></button>
+                            <button type="button" id="start" class="big-button">Start</button>
                         </li>
                     </ul>  
                     
@@ -88,14 +88,14 @@
                             <h3>How it works</h3>
                             <p>The algorithm works a lot like a <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">recrusive backtracker</a> but simplified.</p>
                             <ol class="steps">
-                                <li>The top right most cell is selected. <br> <img  alt="first cell is choosen" src="images/cell-choosen.png"></li> 
+                                <li>The top right most cell is selected. <br> <img  alt="first cell is choosen" src="images/cell_choosen.png"></li> 
                                 <li>A empty cell neighbouring our first cell is <i>dug</i> to.</li>
                                 <li>Another empty cell neighbouring that cell is <i>dug</i> to.</li>
                                 <li>This continues until the newst cell have no more neighbouring empty cells.</li>
                                 <li>Afterwards another top right most cell is choosen.</li>
                                 <li>It picks a neighbouring populated cell to <i>dig</i> to.</li>
                                 
-                                <li>Thereafter it replicates what the previous cells did.<br> <img alt="new cell is choosen" src="images/new choosen.png"></li>
+                                <li>Thereafter it replicates what the previous cells did.<br> <img alt="new cell is choosen" src="images/new_choosen.png"></li>
                                 <li>This continues until all cells have been populated.</li>
                                 <li>After all cells have been populated an exit and start is created.</li>
                                 <li>Maze is done!</li>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <button type="button" value="Generate" id="maze-generate" class="big-button">
-                        <label>Generate</label>
+                        Generate
                     </button>
                     <canvas id="maze-canvas"> </canvas>
                 </article>
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                     <button type="button" value="Generate" class="start-button">
-                        <label>Generate</label>
+                        Generate
                     </button>
                     <canvas id="flocking-canvas">
                     </canvas>
