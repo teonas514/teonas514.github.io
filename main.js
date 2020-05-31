@@ -27,24 +27,28 @@ const warningText = document.getElementById("warningText");
 //const warningSound = new Audio();
 const visualize = document.getElementById("visualize");
 const alarm = new Audio('assets/audios/critical_error.wav');
-alarm.volume = .05;
+alarm.volume = 0;
 function checkWarn(){
   if((columns.value * rows.value > 40000) && !visualize.checked)
   {
-    alarm.play();
     warningText.style.visibility = "visible";
+    alarm.volume = 0.5;
+
   }
   else{
     warningText.style.visibility = "hidden";
+    alarm.volume = 0;
   }
 }
 
 warningText.addEventListener("animationiteration",function(){
   alarm.pause();
   alarm.currentTime = 0;
+  alarm.play();
+
   if (warningText.style.visibility == "visible")
   {
-    alarm.play();
+    alarm.volume = 0.5;
   }
 });
 
