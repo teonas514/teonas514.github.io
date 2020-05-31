@@ -149,6 +149,7 @@ canvas{
 }
 
 .i, .gear {
+    font-size: 0;
     z-index: 1;
     width: 48px;
     padding: 6px;
@@ -227,6 +228,7 @@ canvas{
 }
 
 .close {
+    font-size: 0;
     background-color: transparent;
     border-width: 0;
     width: 48px;
